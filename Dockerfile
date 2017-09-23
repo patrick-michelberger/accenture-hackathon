@@ -12,3 +12,9 @@ ENV PYTHONPATH=$PYTHONPATH:$TOOLHOME/research/object_detection:$TOOLHOME/researc
 
 RUN cd $TOOLHOME/research && python ./object_detection/builders/model_builder_test.py
 
+
+### Setup flask
+RUN pip install flask
+COPY src /src/
+EXPOSE 5000 
+ENTRYPOINT ["python", "/src/app.py"]
