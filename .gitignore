@@ -1,0 +1,4 @@
+.idea/*
+
+# jupyter notebooks
+/notebooks/.ipynb_checkpoints
