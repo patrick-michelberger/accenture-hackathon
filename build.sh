@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build . -t pmichelberger/accenture-hackathon
+docker build ./server -t pmichelberger/accenture-hackathon

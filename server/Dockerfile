@@ -2,7 +2,7 @@ FROM python:3.4
 
 ENV TOOLHOME=/models
 
-RUN pip install tensorflow pillow lxml jupyter pandas matplotlib
+RUN pip install tensorflow pillow lxml jupyter pandas matplotlib flask
 RUN apt-get update && apt-get upgrade -y && apt-get install -y  git protobuf-compiler python-pil python-lxml
 
 RUN cd / && git clone https://github.com/tensorflow/models.git
@@ -17,4 +17,13 @@ ENV PYTHONPATH=$PYTHONPATH:$TOOLHOME/research/object_detection:$TOOLHOME/researc
 RUN cd $TOOLHOME/research && python ./object_detection/builders/model_builder_test.py
 
 WORKDIR notebooks
-CMD jupyter-notebook --ip="*" --no-browser --allow-root
+
+### Flask
+EXPOSE 5000
+### Jupyter
+EXPOSE 8888
+
+COPY src /src
+COPY start.sh /
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
